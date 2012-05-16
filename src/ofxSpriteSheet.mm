@@ -164,7 +164,13 @@ void ofxSpriteSheet::setPosition(string name, int x, int y){
     
     
 }
-
+// -----------------------------------------
+void ofxSpriteSheet::setAnchorPoint(string name, int x, int y){
+    
+    sprites[name].anchor.x = (float)x;
+    sprites[name].anchor.y = (float)y;
+    
+}
 // -----------------------------------------
 void ofxSpriteSheet::setAngle(string name, float tangle){
     

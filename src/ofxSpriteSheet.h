@@ -42,6 +42,7 @@ class ofxSpriteSheet{
         void addSprite(string name, int x, int y, int w, int h);
     
         void setPosition(string name, int x, int y);
+        void setAnchorPoint(string name, int x, int y);
         void setAngle(string name, float tangle);
     
     
