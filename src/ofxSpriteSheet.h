@@ -12,12 +12,16 @@ class spriteType{
             position.x = 0.0;
             position.y = 0.0;
             position.z = 0.0;
+            anchor = position;
+            angle = 0.0;
         }
         string      name;
         ofVec3f     position;
+        ofVec3f     anchor;
         int         meshIndex;
         int         width;
         int         height;
+        float       angle;
     
 };
 
@@ -38,6 +42,8 @@ class ofxSpriteSheet{
         void addSprite(string name, int x, int y, int w, int h);
     
         void setPosition(string name, int x, int y);
+        void setAngle(string name, float tangle);
+    
     
     protected:
     

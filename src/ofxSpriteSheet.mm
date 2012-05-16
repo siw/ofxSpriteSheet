@@ -164,3 +164,28 @@ void ofxSpriteSheet::setPosition(string name, int x, int y){
     
     
 }
+
+// -----------------------------------------
+void ofxSpriteSheet::setAngle(string name, float tangle){
+    
+    // store angle
+    sprites[name].angle = tangle;
+    
+    // first index    
+    int thisIndex = sprites[name].meshIndex;
+    
+    // angle rotation point
+    ofVec3f anchor = sprites[name].anchor;
+    
+    for(int i=0; i<6; i++){
+        
+        int index = thisIndex + i;
+        
+        ofVec3f tempvec = mesh.getVertex(index);
+        
+        tempvec.rotate(tangle, anchor, ofVec3f(0,0,1));
+        
+        mesh.setVertex(index, tempvec);
+    }
+    
+}
