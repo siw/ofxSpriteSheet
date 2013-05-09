@@ -4,6 +4,8 @@
 
 #include "ofMain.h"
 
+#include <map>
+
 // ---
 class spriteType{
     
@@ -56,6 +58,7 @@ class ofxSpriteSheet{
         void drawDebug();
 
         void loadImage(string file);
+        void loadFromTexturePackerXml( string file );
     
         void addSprite(string name, int x, int y, int w, int h);
         void addTextureFrame(string name, int x, int y, int w, int h);

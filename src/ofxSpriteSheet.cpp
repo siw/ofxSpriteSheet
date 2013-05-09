@@ -1,6 +1,7 @@
 
 
 #include "ofxSpriteSheet.h"
+#include "ofxXmlSettings.h"
 
 // --------------------------------------------------------------------------------------
 ofxSpriteSheet::ofxSpriteSheet() {
@@ -76,6 +77,39 @@ void ofxSpriteSheet::loadImage(string file){
     
 }
 
+// --------------------------------------------------------------------------------------
+void ofxSpriteSheet::loadFromTexturePackerXml(string file){
+
+	ofxXmlSettings xml;
+
+	xml.clear();
+	if ( xml.loadFile( file ) == false ){
+		ofLog( OF_LOG_ERROR, "Could not load %s", file.c_str() );
+		return;
+	}
+
+	string imgname = xml.getAttribute( "TextureAtlas", "imagePath", "ERROR" );
+
+#ifdef TARGET_QNX
+	imgname = "/app/native/data/" + imgname;
+#endif
+	loadImage( imgname );
+
+	xml.pushTag( "TextureAtlas" );
+	int numTex = xml.getNumTags("sprite");
+
+	for ( int i = 0; i < numTex; i++ )
+	{
+		string name = xml.getAttribute( "sprite", "n", "ERROR", i );
+		int x = xml.getAttribute( "sprite", "x", -1, i );
+		int y = xml.getAttribute( "sprite", "y", -1, i );
+		int w = xml.getAttribute( "sprite", "w", -1, i );
+		int h = xml.getAttribute( "sprite", "h", -1, i );
+
+		ofLog( OF_LOG_VERBOSE, "%d: %s x:%d y:%d  w:%d h:%d", i, name.c_str(), x, y, w, h );
+	}
+
+}
 // --------------------------------------------------------------------------------------
 void ofxSpriteSheet::addSprite(string name, int x, int y, int w, int h){
     
